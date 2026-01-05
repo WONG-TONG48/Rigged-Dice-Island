@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://fbilxcm4godp"]
+
+[ext_resource type="Script" uid="uid://b2espyfvkvijb" path="res://Scripts/editor.gd" id="1_24ceq"]
+[ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/map.tscn" id="1_eyy8u"]
+
+[node name="Editor" type="Node"]
+script = ExtResource("1_24ceq")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="Map" parent="SubViewportContainer" instance=ExtResource("1_eyy8u")]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 296.0
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_top = 0.956889
+anchor_right = 0.15437502
+anchor_bottom = 1.0
+offset_top = -0.44006348
+offset_right = -0.40000916
+grow_vertical = 0
+text = "Submit"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

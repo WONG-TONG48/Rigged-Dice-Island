@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://stu0ehjec2l6"]
+
+[ext_resource type="Script" uid="uid://c5fptlbptv3cw" path="res://Scripts/edge.gd" id="1_3280n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3280n"]
+font_color = Color(1, 1, 0, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Edge" type="Node2D"]
+script = ExtResource("1_3280n")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.5
+offset_top = -11.5
+offset_right = 51.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "E"
+label_settings = SubResource("LabelSettings_3280n")
+clip_text = true
