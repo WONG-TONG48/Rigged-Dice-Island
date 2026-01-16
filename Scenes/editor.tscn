@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://fbilxcm4godp"]
 
 [ext_resource type="Script" uid="uid://b2espyfvkvijb" path="res://Scripts/editor.gd" id="1_24ceq"]
-[ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/map.tscn" id="1_eyy8u"]
+[ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/board.tscn" id="1_eyy8u"]
 
 [node name="Editor" type="Node"]
 script = ExtResource("1_24ceq")
@@ -19,11 +19,28 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="TextEdit" type="TextEdit" parent="."]
-anchors_preset = 9
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.1546875
 anchor_bottom = 1.0
-offset_right = 296.0
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="HexButton" type="Button" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Hex"
+
+[node name="PortButton" type="Button" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Port"
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = -1
@@ -31,9 +48,11 @@ anchor_top = 0.956889
 anchor_right = 0.15437502
 anchor_bottom = 1.0
 offset_top = -0.44006348
-offset_right = -0.40000916
+offset_right = -0.4000244
 grow_vertical = 0
 text = "Submit"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="pressed" from="PanelContainer/GridContainer/HexButton" to="." method="_on_hex_button_pressed"]
+[connection signal="pressed" from="PanelContainer/GridContainer/PortButton" to="." method="_on_port_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

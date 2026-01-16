@@ -7,7 +7,9 @@ enum Tile{
 	SHEEP,
 	WOOD,
 	BRICK,
-	GOLD
+	DESERT,
+	GOLD,
+	TEMP
 }
 
 
@@ -16,8 +18,15 @@ var corners:Array[Corner]
 var side_length:float
 var corner_radius:float
 var tile:Tile
+var temp=false
+var time=0
 
 func set_type(type:Tile):
+	if type==Tile.TEMP:
+		temp=true
+		return
+	temp=false
+	modulate=Color(1.0, 1.0, 1.0, 1.0)
 	tile=type
 	match tile:
 		Tile.WHEAT:
@@ -35,11 +44,17 @@ func set_type(type:Tile):
 		Tile.BRICK:
 			set_color(Color(0.763, 0.259, 0.0, 1.0))
 			$TextureRect.texture = load("res://Assets/brick.png")
+		Tile.DESERT:
+			set_color(Color("490086ff"))
+			$TextureRect.custom_minimum_size=Vector2(1,1)*radius*1.9
+			$TextureRect.texture = load("res://Assets/desert.png")
 	
-func set_color(color,rand=0.15):
-	$Polygon.color = color.lerp(Color(randf(),randf(),randf()),rand)
-# Called when the node enters the scene tree for the first time.
+func set_color(color,rand=0.2):
+	var val = randf()
+	$Polygon.color = color.lerp(Color(val,val,val),rand)
+
 func _ready() -> void:
+	time=randf()
 	$TextureRect.custom_minimum_size = Vector2(radius,radius)
 	update_verticies()
 
@@ -96,6 +111,13 @@ func create_edges(edge_scene:PackedScene):
 		edges.append(edge)
 	return edges
 		
+func get_edges() -> Array[Edge]:
+	var edges:Array[Edge]=[]
+	for i in range(len(corners)):
+		var next=(i+1)%6
+		edges.append(corners[i].get_edge(corners[next]))
+	return edges
+		
 func get_corner_pos(corner):
 	return corners.find(corner)
 
@@ -108,3 +130,10 @@ func update_verticies():
 		verticies.append(Vector2(0,corner_radius*i))
 		verticies.append(Vector2(radius*i,side_length/2*i))
 	$Polygon.polygon=verticies
+
+func _process(delta: float) -> void:
+	if temp:
+		time+=delta
+		if time == 360:
+			time=0
+		modulate.a=(sin(deg_to_rad(time*100))+1)/8+0.3
