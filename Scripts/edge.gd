@@ -6,7 +6,12 @@ var port:Port=Port.NONE
 var port_trade:Trade=null
 enum Port{
 	NONE,
-	TEST
+	THREE_ONE_ANY,
+	TWO_ONE_WHEAT,
+	TWO_ONE_STONE,
+	TWO_ONE_SHEEP,
+	TWO_ONE_WOOD,
+	TWO_ONE_BRICK,
 }
 
 func create(a:Corner,b:Corner) -> void:
@@ -45,13 +50,28 @@ func position_against_hex(hex:Hex):
 	if abs($Control.rotation)>PI:
 		$Control.rotation-=sign($Control.rotation)*PI*2
 
-func make_port(hex:Hex):
+func make_port(hex:Hex,type:Port=Port.THREE_ONE_ANY):
+	port=type
+	$Control/PortLabel.text="2:1"
+	match port:
+		Port.TWO_ONE_WHEAT:
+			$Control/PortRect/PortImg.texture=load("res://Assets/wheat.webp")
+		Port.TWO_ONE_STONE:
+			$Control/PortRect/PortImg.texture=load("res://Assets/stone.png")
+		Port.TWO_ONE_SHEEP:
+			$Control/PortRect/PortImg.texture=load("res://Assets/sheep.png")
+		Port.TWO_ONE_WOOD:
+			$Control/PortRect/PortImg.texture=load("res://Assets/wood.png")
+		Port.TWO_ONE_BRICK:
+			$Control/PortRect/PortImg.texture=load("res://Assets/brick.png")
+		_:
+			$Control/PortLabel.text="3:1"
+			$Control/PortRect/PortImg.texture=load("res://Assets/mystery.png")
 	$Control/PortRect.show()
 	$Control/PortLabel.show()
 	position_against_hex(hex)
-	port=Port.TEST
+	
 
 func _ready() -> void:
 	$Control/PortRect.hide()
 	$Control/PortLabel.hide()
-	$Control/TestLabel.hide()

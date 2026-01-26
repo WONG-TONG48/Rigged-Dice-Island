@@ -91,6 +91,8 @@ func generate_board(map:Map):
 			hex.name="Hex"+str(row)+str(col)
 			add_child(hex)
 			hex.set_type(hex_info.type)
+			if hex_info.dice_val:
+				hex.set_dice_val(hex_info.dice_val)
 			hex.position=Vector2(col*Hex.radius*2+Hex.radius*(row%2),row*(hex.corner_radius+hex.side_length/2))
 			var hexes:Array[Hex]=[]
 			var corners:Array[Corner]=[]
@@ -119,9 +121,9 @@ func generate_board(map:Map):
 			for k:Edge in hex.create_edges(edge_scene):
 				add_child(k)
 				k.z_index=4
-				for l in hex_info.ports:
-					if hex.get_corner_pos(k.corners[0]) in l and hex.get_corner_pos(k.corners[1]) in l:
-						k.make_port(hex)
+				for l:Array in hex_info.ports:
+					if hex.get_corner_pos(k.corners[0]) in l.slice(0,2) and hex.get_corner_pos(k.corners[1]) in l.slice(0,2):
+						k.make_port(hex,l[2])
 			hex_grid[row].append(hex)
 
 func _input(event: InputEvent) -> void:

@@ -20,6 +20,15 @@ var corner_radius:float
 var tile:Tile
 var temp=false
 var time=0
+var dice_val=0
+
+func set_dice_val(num):
+	dice_val=num
+	$Label.text = str(num)+"\n"+".".repeat(6-abs(num-7))
+	if abs(num-7)==1:
+		$Label.add_theme_color_override("font_color" ,Color(0.667, 0.0, 0.0, 1.0))
+		$Label.add_theme_color_override("font_outline_color",Color(1.0, 1.0, 1.0, 1.0))
+	$Label.show()
 
 func set_type(type:Tile):
 	if type==Tile.TEMP:
@@ -55,7 +64,8 @@ func set_color(color,rand=0.2):
 
 func _ready() -> void:
 	time=randf()
-	$TextureRect.custom_minimum_size = Vector2(radius,radius)
+	$Label.hide()
+	$TextureRect.custom_minimum_size = Vector2(radius,radius)*1.5
 	update_verticies()
 
 func create_corners(corner_scene:PackedScene,other_corners:Array[Corner]=[],other_hexes:Array[Hex]=[]):
@@ -117,6 +127,14 @@ func get_edges() -> Array[Edge]:
 		var next=(i+1)%6
 		edges.append(corners[i].get_edge(corners[next]))
 	return edges
+		
+func get_hexes() -> Array[Hex]:
+	var hexes=[]
+	for i in corners:
+		for j in i.hexes:
+			if j!=self:
+				hexes.append(j)
+	return hexes
 		
 func get_corner_pos(corner):
 	return corners.find(corner)

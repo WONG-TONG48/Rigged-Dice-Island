@@ -1,7 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://1hsyq734yyuc"]
+[gd_scene load_steps=4 format=3 uid="uid://1hsyq734yyuc"]
 
 [ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/board.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://u8ydoml4q3kh" path="res://Scripts/game.gd" id="1_qxrlw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxrlw"]
+bg_color = Color(0.16079065, 0.3172438, 0.36199754, 1)
 
 [node name="Game" type="Node"]
+script = ExtResource("1_qxrlw")
 
-[node name="Map" parent="." instance=ExtResource("1_ebmjs")]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_qxrlw")
+split_offset = 932
+
+[node name="VSplitContainer" type="VSplitContainer" parent="Control/HSplitContainer"]
+layout_mode = 2
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_qxrlw")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/HSplitContainer/VSplitContainer"]
+custom_minimum_size = Vector2(1200, 800)
+layout_mode = 2
+stretch = true
+
+[node name="Map" parent="Control/HSplitContainer/VSplitContainer/SubViewportContainer" instance=ExtResource("1_ebmjs")]
+handle_input_locally = false
+size = Vector2i(1200, 800)
+render_target_update_mode = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/HSplitContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/HSplitContainer"]
+layout_mode = 2

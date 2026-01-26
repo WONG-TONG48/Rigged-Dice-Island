@@ -2,11 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5fptlbptv3cw" path="res://Scripts/edge.gd" id="1_3280n"]
 [ext_resource type="Texture2D" uid="uid://3jy06rfn6m6j" path="res://Assets/port.png" id="2_mnatq"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3280n"]
-font_color = Color(1, 1, 0, 1)
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://i35svkt7fmki" path="res://Assets/mystery.png" id="3_4bu4l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mnatq"]
 font_color = Color(0, 0, 0, 1)
@@ -30,23 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(75.191, 14)
 
-[node name="TestLabel" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Edge"
-label_settings = SubResource("LabelSettings_3280n")
-clip_text = true
-
 [node name="PortRect" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
@@ -54,6 +33,16 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 texture = ExtResource("2_mnatq")
+expand_mode = 1
+
+[node name="PortImg" type="TextureRect" parent="Control/PortRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34705716
+anchor_right = 0.65294284
+offset_top = -35.0
+grow_horizontal = 2
+texture = ExtResource("3_4bu4l")
 expand_mode = 1
 
 [node name="PortLabel" type="Label" parent="Control"]
