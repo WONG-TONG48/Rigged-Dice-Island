@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvrkbfwuvinp7"]
+[gd_scene format=3 uid="uid://cvrkbfwuvinp7"]
 
 [ext_resource type="Script" uid="uid://cds0mohr4cmtg" path="res://Scripts/main.gd" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://1hsyq734yyuc" path="res://Scenes/game.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://1hsyq734yyuc" path="res://Scenes/game.tscn" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://ccq31jb2bsaak" path="res://Scenes/main_menu.tscn" id="2_bo1nx"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1274623918]
 script = ExtResource("1_bo1nx")
 
-[node name="Game" parent="." instance=ExtResource("2_bo1nx")]
+[node name="Game" parent="." unique_id=1572800655 instance=ExtResource("2_8gbba")]
+visible = false
+
+[node name="Main Menu" parent="." unique_id=1998826534 instance=ExtResource("2_bo1nx")]
+
+[connection signal="host_game" from="Main Menu" to="." method="_on_main_menu_host_game"]
+[connection signal="join_game" from="Main Menu" to="." method="_on_main_menu_join_game"]

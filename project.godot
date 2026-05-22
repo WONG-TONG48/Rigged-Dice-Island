@@ -8,17 +8,23 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Rigged Dice Island"
 run/main_scene="uid://cvrkbfwuvinp7"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
+window/size/resizable=false
 display_server/driver.linuxbsd="wayland"
 
 [editor]
@@ -36,6 +42,4 @@ move_camera={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.13872054, 0.37927386, 0.5995731, 1)

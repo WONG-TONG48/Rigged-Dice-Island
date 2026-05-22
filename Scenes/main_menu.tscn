@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://ccq31jb2bsaak"]
+
+[ext_resource type="Script" uid="uid://dh7yuyurw1460" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://bgn7n7vjfmkjv" path="res://Scenes/user_plate.tscn" id="2_48xlc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_28flt"]
+font_size = 178
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28flt"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_48xlc"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ehe0"]
+font_size = 149
+
+[node name="Main Menu" type="Control" unique_id=777478650]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+user_plate = ExtResource("2_48xlc")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=745209622]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.22600001
+offset_bottom = -0.08001709
+grow_horizontal = 2
+text = "Rigged Dice Island"
+label_settings = SubResource("LabelSettings_28flt")
+horizontal_alignment = 1
+
+[node name="Start Menu" type="HBoxContainer" parent="." unique_id=452574451]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.28840744
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 9.5199585
+offset_right = -21.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ButtonMenu" type="VBoxContainer" parent="Start Menu" unique_id=1901317525]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Host" type="Button" parent="Start Menu/ButtonMenu" unique_id=875759593]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 65
+text = "Host Game"
+
+[node name="Join" type="Button" parent="Start Menu/ButtonMenu" unique_id=1880304897]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 65
+text = "Join Game"
+
+[node name="Editor" type="Button" parent="Start Menu/ButtonMenu" unique_id=2044949583]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 65
+text = "Map Editor"
+
+[node name="Settings" type="VBoxContainer" parent="Start Menu" unique_id=643253239]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Player" type="PanelContainer" parent="Start Menu/Settings" unique_id=2106101052]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28flt")
+
+[node name="Menu" type="VBoxContainer" parent="Start Menu/Settings/Player" unique_id=2087204423]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Username" type="HBoxContainer" parent="Start Menu/Settings/Player/Menu" unique_id=43361632]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Start Menu/Settings/Player/Menu/Username" unique_id=2098911799]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Username: "
+label_settings = SubResource("LabelSettings_48xlc")
+
+[node name="LineEdit" type="LineEdit" parent="Start Menu/Settings/Player/Menu/Username" unique_id=1425567445]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+placeholder_text = "ExampleUsername"
+alignment = 1
+max_length = 30
+
+[node name="Color" type="HBoxContainer" parent="Start Menu/Settings/Player/Menu" unique_id=1562921476]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Start Menu/Settings/Player/Menu/Color" unique_id=822262002]
+layout_mode = 2
+text = "Color: "
+label_settings = SubResource("LabelSettings_48xlc")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Start Menu/Settings/Player/Menu/Color" unique_id=246603980]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.6532796, 0.19681811, 0.4907199, 1)
+edit_alpha = false
+edit_intensity = false
+
+[node name="General" type="PanelContainer" parent="Start Menu/Settings" unique_id=1757729336]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_28flt")
+
+[node name="Menu" type="VBoxContainer" parent="Start Menu/Settings/General" unique_id=52438592]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Volume" type="HBoxContainer" parent="Start Menu/Settings/General/Menu" unique_id=586122957]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Start Menu/Settings/General/Menu/Volume" unique_id=1598414131]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Volume: "
+label_settings = SubResource("LabelSettings_48xlc")
+
+[node name="HSlider" type="HSlider" parent="Start Menu/Settings/General/Menu/Volume" unique_id=1120437125]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+value = 0.6
+
+[node name="IP" type="HBoxContainer" parent="Start Menu/Settings/General/Menu" unique_id=1729812957]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Start Menu/Settings/General/Menu/IP" unique_id=458039069]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "IP: "
+label_settings = SubResource("LabelSettings_48xlc")
+
+[node name="LineEdit" type="LineEdit" parent="Start Menu/Settings/General/Menu/IP" unique_id=1170367880]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+text = "127.0.0.1"
+placeholder_text = "123.123.123.123"
+alignment = 1
+
+[node name="Lobby" type="VBoxContainer" parent="Start Menu" unique_id=809658426]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Players" type="PanelContainer" parent="Start Menu/Lobby" unique_id=82260629]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_28flt")
+
+[node name="Menu" type="VBoxContainer" parent="Start Menu/Lobby/Players" unique_id=1390082066]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Start Menu/Lobby" unique_id=580379518]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Leave button" type="Button" parent="Start Menu/Lobby/HBoxContainer" unique_id=496862797]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Leave
+"
+
+[node name="Ready button" type="Button" parent="Start Menu/Lobby/HBoxContainer" unique_id=843291074]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Ready"
+
+[node name="Loading" type="PanelContainer" parent="." unique_id=1115674144]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Loading" unique_id=330540207]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LOADING..."
+label_settings = SubResource("LabelSettings_1ehe0")
+
+[connection signal="text_changed" from="Start Menu/Settings/Player/Menu/Username/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="popup_closed" from="Start Menu/Settings/Player/Menu/Color/ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
+[connection signal="value_changed" from="Start Menu/Settings/General/Menu/Volume/HSlider" to="." method="_on_volume_changed"]
+[connection signal="pressed" from="Start Menu/Lobby/HBoxContainer/Ready button" to="." method="_on_ready_button_pressed"]
