@@ -17,8 +17,8 @@ var brush:EditorBrush=EditorBrush.RESUORCE_HEX
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pass
 	#generate_board(Map.new())
-	editor_board()
 		
 func export_board()->String:
 	var map_str=""

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1hsyq734yyuc"]
 
 [ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/board.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://u8ydoml4q3kh" path="res://Scripts/game.gd" id="1_qxrlw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxrlw"]
 bg_color = Color(0.16079065, 0.3172438, 0.36199754, 1)
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qxrlw")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=2049524153]
 layout_mode = 1
@@ -21,8 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_qxrlw")
-split_offsets = PackedInt32Array(932)
-split_offset = 932
 
 [node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer" unique_id=748842177]
 layout_mode = 2

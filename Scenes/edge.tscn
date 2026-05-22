@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://stu0ehjec2l6"]
+[gd_scene format=3 uid="uid://stu0ehjec2l6"]
 
 [ext_resource type="Script" uid="uid://c5fptlbptv3cw" path="res://Scripts/edge.gd" id="1_3280n"]
 [ext_resource type="Texture2D" uid="uid://3jy06rfn6m6j" path="res://Assets/port.png" id="2_mnatq"]
@@ -8,10 +8,22 @@
 font_color = Color(0, 0, 0, 1)
 outline_size = 4
 
-[node name="Edge" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bu4l"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.61745507, 0.61745465, 0.6174547, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 2
+
+[node name="Edge" type="Node2D" unique_id=616432358]
 script = ExtResource("1_3280n")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=61133406]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(75.191, 14)
 
-[node name="PortRect" type="TextureRect" parent="Control"]
+[node name="PortRect" type="TextureRect" parent="Control" unique_id=914296584]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -35,7 +47,7 @@ grow_horizontal = 2
 texture = ExtResource("2_mnatq")
 expand_mode = 1
 
-[node name="PortImg" type="TextureRect" parent="Control/PortRect"]
+[node name="PortImg" type="TextureRect" parent="Control/PortRect" unique_id=128017910]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.34705716
@@ -45,7 +57,7 @@ grow_horizontal = 2
 texture = ExtResource("3_4bu4l")
 expand_mode = 1
 
-[node name="PortLabel" type="Label" parent="Control"]
+[node name="PortLabel" type="Label" parent="Control" unique_id=1089687718]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.35335034
@@ -58,4 +70,16 @@ grow_horizontal = 2
 text = "3:1"
 label_settings = SubResource("LabelSettings_mnatq")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Road" type="Panel" parent="Control" unique_id=2057909668]
+modulate = Color(0.69411767, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.38
+anchor_right = 1.0
+anchor_bottom = 0.62
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4bu4l")
 metadata/_edit_use_anchors_ = true

@@ -3,6 +3,7 @@ class_name Edge
 
 var corners:Array[Corner]
 var port:Port=Port.NONE
+@onready var road:Panel = $Control/Road
 var port_trade:Trade=null
 enum Port{
 	NONE,
@@ -71,7 +72,11 @@ func make_port(hex:Hex,type:Port=Port.THREE_ONE_ANY):
 	$Control/PortLabel.show()
 	position_against_hex(hex)
 	
+func make_road(player:Main.Player):
+	road.modulate = player.color
+	road.show()
 
 func _ready() -> void:
 	$Control/PortRect.hide()
 	$Control/PortLabel.hide()
+	road.hide()

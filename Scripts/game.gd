@@ -1,4 +1,6 @@
 extends Node
 
+@onready var board:Board = $HSplitContainer/VSplitContainer/SubViewportContainer/Map
+
 func _ready() -> void:
-	pass
+	board.generate_board(Map.new())
