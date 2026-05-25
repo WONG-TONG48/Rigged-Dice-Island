@@ -1,12 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://otv5kuo1ekqp"]
+[gd_scene format=3 uid="uid://otv5kuo1ekqp"]
 
 [ext_resource type="Script" uid="uid://cxwf4do5f1r1e" path="res://Scripts/board.gd" id="1_tnbny"]
 
-[node name="Board" type="SubViewport"]
+[node name="Board" type="SubViewport" unique_id=1141022856]
 size = Vector2i(520, 520)
 script = ExtResource("1_tnbny")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1852474453]
 position = Vector2(961, 540)
+limit_enabled = false
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0

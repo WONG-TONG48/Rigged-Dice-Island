@@ -26,16 +26,18 @@ theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_qxrlw")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer" unique_id=748842177]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_qxrlw")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HSplitContainer/VSplitContainer" unique_id=1921503530]
 custom_minimum_size = Vector2(1200, 800)
 layout_mode = 2
+size_flags_vertical = 3
 stretch = true
 
 [node name="Map" parent="HSplitContainer/VSplitContainer/SubViewportContainer" unique_id=469479429 instance=ExtResource("1_ebmjs")]
 handle_input_locally = false
-size = Vector2i(1200, 800)
+size = Vector2i(1908, 1068)
 render_target_update_mode = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/VSplitContainer" unique_id=73096704]

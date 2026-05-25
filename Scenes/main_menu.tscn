@@ -84,6 +84,12 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 65
 text = "Map Editor"
 
+[node name="Exit" type="Button" parent="Start Menu/ButtonMenu" unique_id=1599240867]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Quit
+"
+
 [node name="Settings" type="VBoxContainer" parent="Start Menu" unique_id=643253239]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -219,6 +225,7 @@ size_flags_horizontal = 4
 text = "LOADING..."
 label_settings = SubResource("LabelSettings_1ehe0")
 
+[connection signal="pressed" from="Start Menu/ButtonMenu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="text_changed" from="Start Menu/Settings/Player/Menu/Username/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="popup_closed" from="Start Menu/Settings/Player/Menu/Color/ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
 [connection signal="value_changed" from="Start Menu/Settings/General/Menu/Volume/HSlider" to="." method="_on_volume_changed"]

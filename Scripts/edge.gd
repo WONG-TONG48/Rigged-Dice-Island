@@ -5,6 +5,7 @@ var corners:Array[Corner]
 var port:Port=Port.NONE
 @onready var road:Panel = $Control/Road
 var port_trade:Trade=null
+var owner_id:int =0
 enum Port{
 	NONE,
 	THREE_ONE_ANY,
@@ -18,9 +19,7 @@ enum Port{
 func create(a:Corner,b:Corner) -> void:
 	corners.append(a)
 	corners.append(b)
-	#print($Control.position,$Control.size)
-	
-	#print($Control.position,$Control.size)
+
 	position=(a.position+b.position)/2
 	name=a.name+" "+b.name+" edge"
 	$Control.size.x=a.position.distance_to(b.position)-10
@@ -72,9 +71,14 @@ func make_port(hex:Hex,type:Port=Port.THREE_ONE_ANY):
 	$Control/PortLabel.show()
 	position_against_hex(hex)
 	
-func make_road(player:Main.Player):
+func make_road(player_id:int):
+	var player = Main.Player.player_db[player_id]
 	road.modulate = player.color
+	owner_id=player_id
 	road.show()
+
+func is_empty():
+	return owner_id==0
 
 func _ready() -> void:
 	$Control/PortRect.hide()

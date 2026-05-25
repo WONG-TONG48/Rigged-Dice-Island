@@ -129,7 +129,7 @@ func generate_board(map:Map):
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera.zoom=(camera.zoom * (1.1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 0.9)).clamp(Vector2(0.2,0.2),Vector2(5,5))
+			camera.zoom=(camera.zoom * (1.1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 0.9)).clamp(Vector2(0.4,0.4),Vector2(5,5))
 		elif edit and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			match brush:
 				EditorBrush.RESUORCE_HEX:

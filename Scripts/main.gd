@@ -2,6 +2,7 @@ extends Node
 class_name Main
 
 class Player:
+	static var player_db:Dictionary[int,Player]={}
 	var username:String
 	var id:int
 	var color:Color
@@ -10,11 +11,12 @@ class Player:
 		username= _username
 		id = _id
 		color = _color
+		player_db[id]=self
 
 
 const PORT = 25876
 
-var players:Array[Player]=[]
+var players:Array[int]=[]
 var cur_turn=-1
 @onready
 var main_menu := $"Main Menu"
@@ -29,12 +31,13 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(connection_failed)
 
 func player_leave(id):
-	var ind = 0
-	for i in players:
-		if i.id == id:
-			players.remove_at(ind)
-			break
-		ind+=1
+	if multiplayer.is_server():
+		var ind = 0
+		for i in players:
+			if i == id:
+				players.remove_at(ind)
+				break
+			ind+=1
 	main_menu.remove_player(id)
 
 @rpc("call_local","reliable")
@@ -46,11 +49,11 @@ func next_turn():
 	cur_turn+=1
 	if cur_turn>=len(players):
 		cur_turn=0
-	$Game.set_turn_name.rpc(players[cur_turn].username)
-	if players[cur_turn].id==1:
+	$Game.set_turn.rpc(players[cur_turn])
+	if players[cur_turn]==1:
 		$Game.start_turn()
 	else:
-		$Game.start_turn.rpc_id(players[cur_turn].id)
+		$Game.start_turn.rpc_id(players[cur_turn])
 
 func start_button_pressed():
 	for i:Node in $Lobby/UserPlateContainer.get_children():
@@ -66,8 +69,9 @@ func _on_main_menu_host_game() -> void:
 	peer.create_server(PORT)
 	main_menu.join_lobby()
 	multiplayer.multiplayer_peer = peer
-	players.append(Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data()))
-	main_menu.add_player(players.back())
+	var player = Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data())
+	players.append(player.id)
+	main_menu.add_player(player)
 
 
 func _on_main_menu_join_game() -> void:
@@ -78,15 +82,11 @@ func _on_main_menu_join_game() -> void:
 		connection_failed()
 		return
 	multiplayer.multiplayer_peer = peer
-	players.append(Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data()))
-	main_menu.add_player(players.back())
+	main_menu.add_player(Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data()))
 
 @rpc("any_peer")
 func change_player_data(property:String,data):
-	for i in players:
-		if i.id == multiplayer.get_remote_sender_id():
-			i.set(property,data)
-			break
+	Player.player_db[multiplayer.get_remote_sender_id()].set(property,data)
 
 func connection_succses():
 	main_menu.hide_loading()
@@ -116,10 +116,9 @@ func peer_connected(id):
 @rpc("any_peer","reliable")
 func player_joined(data):
 	var id = multiplayer.get_remote_sender_id()
-	players.append(Player.new.callv([id]+data))
-	main_menu.add_player(players.back())
+	main_menu.add_player(Player.new.callv([id]+data))
 	if multiplayer.is_server():
-		pass
+		players.append(id)
 
 
 func _on_game_turn_finished() -> void:

@@ -88,3 +88,7 @@ func _on_ready_button_pressed() -> void:
 		start_game.emit()
 	else:
 		lobby_list.get_node(str(multiplayer.get_unique_id())).toggle_ready.rpc()
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

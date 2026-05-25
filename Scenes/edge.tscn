@@ -10,10 +10,10 @@ outline_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4bu4l"]
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0.61745507, 0.61745465, 0.6174547, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -37,6 +37,7 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(75.191, 14)
+mouse_filter = 1
 
 [node name="PortRect" type="TextureRect" parent="Control" unique_id=914296584]
 layout_mode = 1
@@ -76,8 +77,9 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(0.69411767, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.114318095
 anchor_top = 0.38
-anchor_right = 1.0
+anchor_right = 0.8856819
 anchor_bottom = 0.62
 grow_horizontal = 2
 grow_vertical = 2
