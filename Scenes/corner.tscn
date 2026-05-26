@@ -2,10 +2,37 @@
 
 [ext_resource type="Script" uid="uid://cabboh7hgibj0" path="res://Scripts/corner.gd" id="1_0ynou"]
 
+[sub_resource type="Gradient" id="Gradient_0ynou"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.82509506, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.5294118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8uts"]
+gradient = SubResource("Gradient_0ynou")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8000001, 0.13333334)
+metadata/_snap_enabled = true
+metadata/_snap_count = 15
+
+[sub_resource type="Gradient" id="Gradient_5fp71"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.82509506, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.7455808, 0.7455801, 0.74558014, 0.5294118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oj8e5"]
+gradient = SubResource("Gradient_5fp71")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8000001, 0.13333334)
+metadata/_snap_enabled = true
+metadata/_snap_count = 15
+
 [node name="Corner" type="Node2D" unique_id=231992145]
 script = ExtResource("1_0ynou")
 
 [node name="ObjectTexture" type="TextureRect" parent="." unique_id=482973657]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,3 +45,22 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=576049767]
+visible = false
+modulate = Color(1, 0.84313726, 0.5568628, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("GradientTexture2D_a8uts")
+texture_hover = SubResource("GradientTexture2D_oj8e5")
+ignore_texture_size = true
+stretch_mode = 0

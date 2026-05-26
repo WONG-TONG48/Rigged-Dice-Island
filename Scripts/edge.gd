@@ -79,6 +79,9 @@ func make_road(player_id:int):
 
 func is_empty():
 	return owner_id==0
+	
+func get_other_corner(c:Corner):
+	return corners[1] if corners[0]==c else corners[0]
 
 func _ready() -> void:
 	$Control/PortRect.hide()

@@ -1,6 +1,7 @@
 extends SubViewport
 class_name Board
 
+var on_finish:Callable
 var hex_scene = preload("res://Scenes/hex.tscn")
 var corner_scene = preload("res://Scenes/corner.tscn")
 var edge_scene = preload("res://Scenes/edge.tscn")
@@ -178,3 +179,27 @@ func _process(delta: float) -> void:
 		#Input.warp_mouse(original_pos)
 		original_pos=null
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
+func prompt_settlement(id,starting=false):
+	var avaliable:Array[Corner] = []
+	for i in get_children():
+		if i is Corner:
+			avaliable.append(i)
+	for i in get_children():
+		if i is Corner&& i.owner_id!=0:
+			for j in i.corners:
+				var  ind = avaliable.find(j)
+				if ind>=0:
+					avaliable.remove_at(ind)
+	if !starting:
+		var final:Array[Corner] = []
+		for i in avaliable:
+			var connected = false
+			for j in i.edges:
+				if j.owner_id==id:
+					connected=true
+					break
+			if connected:
+				final.append(i)
+		avaliable=final
+	

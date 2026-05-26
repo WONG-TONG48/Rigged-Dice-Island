@@ -2,6 +2,7 @@ extends Node2D
 class_name Corner
 
 @onready var obj_tex := $ObjectTexture
+@onready var button := $TextureButton
 var city_tex:Texture = preload("res://Assets/city.svg")
 var settlement_tex:Texture = preload("res://Assets/house.svg")
 
@@ -49,4 +50,18 @@ func is_empty():
 
 func _ready() -> void:
 	obj_tex.hide()
+	button.hide()
+	
+func get_nearby_corners(include_self=true):
+	var corners = []
+	if include_self:
+		corners.append(self)
+	for i in edges:
+		corners.append(i.get_other_corner(self))
+
+func _process(delta: float) -> void:
+	if button.visible:
+		button.scale=Vector2(1,1)*(1+0.2*sin(deg_to_rad(Time.get_ticks_msec()/2)))
+		button.position=button.scale*button.size/-2
+		
 	
