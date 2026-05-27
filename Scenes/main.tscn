@@ -12,5 +12,7 @@ visible = false
 
 [node name="Main Menu" parent="." unique_id=1998826534 instance=ExtResource("2_bo1nx")]
 
+[connection signal="setup_done" from="Game" to="." method="_on_game_setup_done"]
 [connection signal="host_game" from="Main Menu" to="." method="_on_main_menu_host_game"]
 [connection signal="join_game" from="Main Menu" to="." method="_on_main_menu_join_game"]
+[connection signal="start_game" from="Main Menu" to="." method="_on_main_menu_start_game"]

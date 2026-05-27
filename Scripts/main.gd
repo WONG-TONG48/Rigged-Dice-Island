@@ -18,13 +18,13 @@ const PORT = 25876
 
 var players:Array[int]=[]
 var cur_turn=-1
-@onready
-var main_menu := $"Main Menu"
+@onready var main_menu := $"Main Menu"
+@onready var game := $Game
 
 func _ready() -> void:
 	main_menu.leave_game.connect(leave_game)
 	main_menu.change_user_data.connect(change_player_data.rpc)
-	main_menu.start_game.connect(start_game.rpc)
+	main_menu.start_game.connect(start_game)
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.connected_to_server.connect(connection_succses)
 	multiplayer.peer_disconnected.connect(player_leave)
@@ -40,20 +40,45 @@ func player_leave(id):
 			ind+=1
 	main_menu.remove_player(id)
 
-@rpc("call_local","reliable")
 func start_game():
-	pass
+	game.start.rpc()
+	show_game.rpc()
+	players.shuffle()
+	setup_turn()
+
+@rpc("call_local")
+func show_game():
+	game.show()
+	main_menu.hide()
+
+@rpc("any_peer")
+func setup_turn():
+	for i in players:
+		if game.board.count_corner_item(Corner.Type.SETTLEMENT,i)<1:
+			if i ==1:
+				game.setup_turn()
+			else:
+				game.setup_turn.rpc_id(i)
+			return
+	for i in range(len(players)-1,-1,-1):
+		if game.board.count_corner_item(Corner.Type.SETTLEMENT,players[i])<2:
+			if players[i]==1:
+				game.setup_turn()
+			else:
+				game.setup_turn.rpc_id(players[i])
+			return
+	next_turn()
 
 @rpc("any_peer","reliable")
 func next_turn():
 	cur_turn+=1
 	if cur_turn>=len(players):
 		cur_turn=0
-	$Game.set_turn.rpc(players[cur_turn])
+	game.set_turn.rpc(players[cur_turn])
 	if players[cur_turn]==1:
-		$Game.start_turn()
+		game.start_turn()
 	else:
-		$Game.start_turn.rpc_id(players[cur_turn])
+		game.start_turn.rpc_id(players[cur_turn])
 
 func start_button_pressed():
 	for i:Node in $Lobby/UserPlateContainer.get_children():
@@ -126,3 +151,11 @@ func _on_game_turn_finished() -> void:
 		next_turn()
 		return
 	next_turn.rpc_id(1)
+
+
+func _on_game_setup_done() -> void:
+	if multiplayer.is_server():
+		setup_turn()
+		return
+	setup_turn.rpc_id(1)
+	

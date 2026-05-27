@@ -19,7 +19,6 @@ var brush:EditorBrush=EditorBrush.RESUORCE_HEX
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	#generate_board(Map.new())
 		
 func export_board()->String:
 	var map_str=""
@@ -68,7 +67,13 @@ func export_board()->String:
 	if end:
 		final_str=final_str.trim_suffix(("e".repeat(len(hex_grid[0])-total_start-total_end)+"|").repeat(end))
 	return final_str.rstrip("|")
-	
+
+func count_corner_item(type:Corner.Type,player_id):
+	var count := 0
+	for i in get_children():
+		if i is Corner && i.object==type && i.owner_id==player_id:
+			count+=1
+	return count
 		
 func clear_board():
 	for i in get_children():
@@ -180,14 +185,20 @@ func _process(delta: float) -> void:
 		original_pos=null
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
-func prompt_settlement(id,starting=false):
+func unprompt_corners(corner:Corner,callback:Callable):
+	for i in get_children():
+		if i is Corner && i.button.visible:
+			i.unprompt()
+	callback.call(corner)
+
+func prompt_settlement(callback:Callable,starting:bool=false):
 	var avaliable:Array[Corner] = []
 	for i in get_children():
 		if i is Corner:
 			avaliable.append(i)
 	for i in get_children():
 		if i is Corner&& i.owner_id!=0:
-			for j in i.corners:
+			for j in i.get_nearby_corners():
 				var  ind = avaliable.find(j)
 				if ind>=0:
 					avaliable.remove_at(ind)
@@ -196,10 +207,12 @@ func prompt_settlement(id,starting=false):
 		for i in avaliable:
 			var connected = false
 			for j in i.edges:
-				if j.owner_id==id:
+				if j.owner_id==multiplayer.get_unique_id():
 					connected=true
 					break
 			if connected:
 				final.append(i)
 		avaliable=final
-	
+	for i in avaliable:
+		i.prompt_select()
+		i.selected.connect(unprompt_corners.bind(callback))

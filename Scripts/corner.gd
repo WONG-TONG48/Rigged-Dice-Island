@@ -1,6 +1,7 @@
 extends Node2D
 class_name Corner
 
+signal selected(corner:Corner)
 @onready var obj_tex := $ObjectTexture
 @onready var button := $TextureButton
 var city_tex:Texture = preload("res://Assets/city.svg")
@@ -22,13 +23,14 @@ func is_adjacent(corner) -> bool:
 		if corner in i.corners:
 			return true
 	return false
-	
+
 func get_edge(corner):
 	for i in edges:
 		if corner in i.corners:
 			return i
 	return null
-	
+
+@rpc("any_peer","call_local")
 func set_type(type:Type=Type.EMPTY,player_id:int=0):
 	object=type
 	obj_tex.show()
@@ -49,6 +51,7 @@ func is_empty():
 	return owner_id==0
 
 func _ready() -> void:
+	button.pressed.connect(selected.emit.bind(self))
 	obj_tex.hide()
 	button.hide()
 	
@@ -58,10 +61,17 @@ func get_nearby_corners(include_self=true):
 		corners.append(self)
 	for i in edges:
 		corners.append(i.get_other_corner(self))
+	return corners
 
 func _process(delta: float) -> void:
 	if button.visible:
-		button.scale=Vector2(1,1)*(1+0.2*sin(deg_to_rad(Time.get_ticks_msec()/2)))
+		button.size=Vector2(40,40)*(1+0.2*sin(deg_to_rad(Time.get_ticks_msec()/3)))
 		button.position=button.scale*button.size/-2
 		
-	
+func prompt_select():
+	button.visible = true
+
+func unprompt():
+	button.visible=false
+	for i in selected.get_connections():
+		selected.disconnect(i["callable"])
