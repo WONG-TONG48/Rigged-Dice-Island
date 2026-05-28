@@ -23,5 +23,4 @@ func create_player_list(players):
 	
 @rpc("call_local")
 func set_turn(id):
-	print(id)
 	menu.set_turn(id)
