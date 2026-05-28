@@ -3,7 +3,7 @@ extends Node
 @onready
 var lobby= $"Start Menu/Lobby"
 @onready
-var lobby_list = $"Start Menu/Lobby/Players/Menu"
+var lobby_list = $"Start Menu/Lobby/Players/MarginContainer/Menu"
 @onready
 var buttons = $"Start Menu/ButtonMenu"
 @export var user_plate:PackedScene
@@ -47,13 +47,14 @@ func join_lobby():
 func remove_player(id):
 	lobby_list.get_node(str(id)).queue_free()
 
-func add_player(player:Main.Player):
+func add_player(player_id):
 	var plate = user_plate.instantiate()
-	plate.name = str(player.id)
-	plate.user_ready = player.id ==1
+	plate.name = str(player_id)
+	plate.user_ready = player_id ==1
 	lobby_list.add_child(plate)
-	plate.set_multiplayer_authority(player.id)
-	plate.set_username(player.username,player.color)
+	plate.set_multiplayer_authority(player_id)
+	plate.set_username(player_id)
+	plate.menu_display()
 
 func clear_players():
 	for i in lobby_list.get_children():

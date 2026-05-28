@@ -2,18 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cg0jqcsmq1q56" path="res://Scripts/user_plate.gd" id="1_877t7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fao6"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 7
-
 [sub_resource type="LabelSettings" id="LabelSettings_877t7"]
 font_size = 40
 font_color = Color(0.15703979, 0.15703979, 0.15703979, 1)
@@ -33,7 +21,6 @@ anchor_right = 0.21197917
 anchor_bottom = 0.1
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_3fao6")
 script = ExtResource("1_877t7")
 metadata/_edit_use_anchors_ = true
 

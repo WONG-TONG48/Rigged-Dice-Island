@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://djxtmwayaddpu"]
+
+[ext_resource type="Theme" uid="uid://cm48mil5la657" path="res://Themes/game_ui.theme" id="1_r7qr8"]
+[ext_resource type="Script" uid="uid://bykpdd6ya8teu" path="res://Scripts/game_menu.gd" id="2_in7i6"]
+[ext_resource type="PackedScene" uid="uid://bgn7n7vjfmkjv" path="res://Scenes/user_plate.tscn" id="3_5a81j"]
+
+[node name="GameMenu" type="PanelContainer" unique_id=78630195]
+anchors_preset = -1
+anchor_right = 0.14270833
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r7qr8")
+script = ExtResource("2_in7i6")
+user_plate = ExtResource("3_5a81j")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=690922530]
+layout_mode = 2
+theme = ExtResource("1_r7qr8")
+
+[node name="Players" type="VBoxContainer" parent="MarginContainer" unique_id=284130706]
+layout_mode = 2

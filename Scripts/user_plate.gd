@@ -6,9 +6,9 @@ var username_lbl := $VBoxContainer/Username
 var ready_lbl := $VBoxContainer/ReadyLabel
 var user_ready := false
 
-func set_username(username:String,color:Color):
-	username_lbl.text = username
-	username_lbl.label_settings.outline_color = color
+func set_username(player_id):
+	username_lbl.text = Main.Player.player_db[player_id].username
+	username_lbl.label_settings.outline_color = Main.Player.player_db[player_id].color
 
 @rpc("call_local")
 func change_color(color):
@@ -26,6 +26,12 @@ func toggle_ready():
 
 func menu_display():
 	ready_lbl.show()
+
+func set_active(active:bool):
+	modulate = Color(1.0,1.0,1.0) if active else Color(0.667, 0.667, 0.667, 1.0)
+
+func game_display():
+	ready_lbl.hide()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

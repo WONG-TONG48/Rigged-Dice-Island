@@ -43,6 +43,7 @@ func player_leave(id):
 func start_game():
 	game.start.rpc()
 	show_game.rpc()
+	game.create_player_list.rpc(players)
 	players.shuffle()
 	setup_turn()
 
@@ -55,6 +56,7 @@ func show_game():
 func setup_turn():
 	for i in players:
 		if game.board.count_corner_item(Corner.Type.SETTLEMENT,i)<1:
+			game.set_turn.rpc(i)
 			if i ==1:
 				game.setup_turn()
 			else:
@@ -62,6 +64,7 @@ func setup_turn():
 			return
 	for i in range(len(players)-1,-1,-1):
 		if game.board.count_corner_item(Corner.Type.SETTLEMENT,players[i])<2:
+			game.set_turn.rpc(players[i])
 			if players[i]==1:
 				game.setup_turn()
 			else:
@@ -96,7 +99,7 @@ func _on_main_menu_host_game() -> void:
 	multiplayer.multiplayer_peer = peer
 	var player = Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data())
 	players.append(player.id)
-	main_menu.add_player(player)
+	main_menu.add_player(player.id)
 
 
 func _on_main_menu_join_game() -> void:
@@ -107,9 +110,10 @@ func _on_main_menu_join_game() -> void:
 		connection_failed()
 		return
 	multiplayer.multiplayer_peer = peer
-	main_menu.add_player(Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data()))
+	var player = Player.new.callv([multiplayer.get_unique_id()]+main_menu.get_player_data())
+	main_menu.add_player(player.id)
 
-@rpc("any_peer")
+@rpc("any_peer","call_local")
 func change_player_data(property:String,data):
 	Player.player_db[multiplayer.get_remote_sender_id()].set(property,data)
 
@@ -141,7 +145,8 @@ func peer_connected(id):
 @rpc("any_peer","reliable")
 func player_joined(data):
 	var id = multiplayer.get_remote_sender_id()
-	main_menu.add_player(Player.new.callv([id]+data))
+	Player.new.callv([id]+data)
+	main_menu.add_player(id)
 	if multiplayer.is_server():
 		players.append(id)
 
