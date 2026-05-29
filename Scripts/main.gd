@@ -7,6 +7,9 @@ class Player:
 	var id:int
 	var color:Color
 	
+	func get_player_tag() -> String:
+		return "[color=#%s][b]%s[/b][/color]" % [color.to_html(false),username]
+	
 	func _init(_id,_username,_color) -> void:
 		username= _username
 		id = _id
@@ -50,6 +53,7 @@ func start_game():
 @rpc("call_local")
 func show_game():
 	game.show()
+	game.player=Player.player_db[multiplayer.get_unique_id()]
 	main_menu.hide()
 
 @rpc("any_peer")

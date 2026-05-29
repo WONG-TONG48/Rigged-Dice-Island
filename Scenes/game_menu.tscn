@@ -18,5 +18,35 @@ user_plate = ExtResource("3_5a81j")
 layout_mode = 2
 theme = ExtResource("1_r7qr8")
 
-[node name="Players" type="VBoxContainer" parent="MarginContainer" unique_id=284130706]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1124725653]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=331140432]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=781674292]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/line_separation = -6
+theme_override_constants/paragraph_separation = 7
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+bbcode_enabled = true
+text = "Welcome to [color=#48e8fa][b][i]Rigged Dice Island![/i][/b][/color]"
+fit_content = true
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=595839929]
+layout_mode = 2
+placeholder_text = "Send a message here..."
+max_length = 20
+
+[node name="Players" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=284130706]
+layout_mode = 2
+
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

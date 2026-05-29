@@ -2,6 +2,7 @@ extends Node
 
 @onready var board:Board = $HSplitContainer/VSplitContainer/SubViewportContainer/Map
 @onready var menu := $HSplitContainer/GameMenu
+var player:Main.Player
 signal setup_done
 
 @rpc("call_local")
@@ -14,6 +15,7 @@ func setup_turn():
 
 func setup_settlement(corner:Corner):
 	corner.set_type.rpc(Corner.Type.SETTLEMENT,multiplayer.get_unique_id())
+	menu.send_message.rpc(player.get_player_tag()+" placed a [u]settlement[/u]!")
 	setup_done.emit()
 	
 @rpc("call_local")
