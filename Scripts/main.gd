@@ -86,15 +86,6 @@ func next_turn():
 		game.start_turn()
 	else:
 		game.start_turn.rpc_id(players[cur_turn])
-
-func start_button_pressed():
-	for i:Node in $Lobby/UserPlateContainer.get_children():
-		if not i.readied:
-			return
-	players.shuffle()
-	cur_turn=-1
-	next_turn()
-	start_game.rpc()
 	
 func _on_main_menu_host_game() -> void:
 	var peer = ENetMultiplayerPeer.new()

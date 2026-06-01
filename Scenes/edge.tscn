@@ -20,6 +20,32 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 2
 
+[sub_resource type="Gradient" id="Gradient_0ynou"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.82509506, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.5294118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4bu4l"]
+gradient = SubResource("Gradient_0ynou")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8000001, 0.13333334)
+metadata/_snap_enabled = true
+metadata/_snap_count = 15
+
+[sub_resource type="Gradient" id="Gradient_5fp71"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.82509506, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.7455808, 0.7455801, 0.74558014, 0.5294118, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y7tyk"]
+gradient = SubResource("Gradient_5fp71")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8000001, 0.13333334)
+metadata/_snap_enabled = true
+metadata/_snap_count = 15
+
 [node name="Edge" type="Node2D" unique_id=616432358]
 script = ExtResource("1_3280n")
 
@@ -77,11 +103,30 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(0.69411767, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.114318095
-anchor_top = 0.38
-anchor_right = 0.8856819
-anchor_bottom = 0.62
+anchor_left = 0.10101872
+anchor_top = 0.36
+anchor_right = 0.8989813
+anchor_bottom = 0.64
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4bu4l")
 metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=389025583]
+modulate = Color(1, 0.84313726, 0.5568628, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("GradientTexture2D_4bu4l")
+texture_hover = SubResource("GradientTexture2D_y7tyk")
+ignore_texture_size = true
+stretch_mode = 0

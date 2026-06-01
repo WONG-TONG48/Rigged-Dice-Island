@@ -23,6 +23,14 @@ func is_adjacent(corner) -> bool:
 		if corner in i.corners:
 			return true
 	return false
+	
+func avalible_for_road(id):
+	if owner_id:
+		return owner_id==id
+	for i in edges:
+		if i.owner_id==id:
+			return true
+	return false
 
 func get_edge(corner):
 	for i in edges:

@@ -1,9 +1,11 @@
 extends Node2D
 class_name Edge
 
+signal selected(corner:Edge)
 var corners:Array[Corner]
 var port:Port=Port.NONE
 @onready var road:Panel = $Control/Road
+@onready var button := $TextureButton
 var port_trade:Trade=null
 var owner_id:int =0
 enum Port{
@@ -71,6 +73,7 @@ func make_port(hex:Hex,type:Port=Port.THREE_ONE_ANY):
 	$Control/PortLabel.show()
 	position_against_hex(hex)
 	
+@rpc("any_peer","call_local")
 func make_road(player_id:int):
 	var player = Main.Player.player_db[player_id]
 	road.modulate = player.color
@@ -84,6 +87,21 @@ func get_other_corner(c:Corner):
 	return corners[1] if corners[0]==c else corners[0]
 
 func _ready() -> void:
+	button.pressed.connect(selected.emit.bind(self))
 	$Control/PortRect.hide()
 	$Control/PortLabel.hide()
 	road.hide()
+	button.hide()
+
+func _process(delta: float) -> void:
+	if button.visible:
+		button.size=Vector2(40,40)*(1+0.2*sin(deg_to_rad(Time.get_ticks_msec()/3)))
+		button.position=button.scale*button.size/-2
+		
+func prompt_select():
+	button.visible = true
+
+func unprompt():
+	button.visible=false
+	for i in selected.get_connections():
+		selected.disconnect(i["callable"])

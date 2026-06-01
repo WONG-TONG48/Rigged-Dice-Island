@@ -15,8 +15,17 @@ func setup_turn():
 
 func setup_settlement(corner:Corner):
 	corner.set_type.rpc(Corner.Type.SETTLEMENT,multiplayer.get_unique_id())
-	menu.send_message.rpc(player.get_player_tag()+" placed a [u]settlement[/u]!")
+	menu.send_message.rpc(player.get_player_tag()+" placed a [color=black][u]settlement[/u][/color]!")
+	board.prompt_road(setup_road,corner)
+
+func setup_road(edge:Edge):
+	edge.make_road.rpc(multiplayer.get_unique_id())
+	menu.send_message.rpc(player.get_player_tag()+" placed a [color=darkgray][u]road[/u][/color]!")
 	setup_done.emit()
+	
+@rpc("any_peer")
+func start_turn():
+	pass
 	
 @rpc("call_local")
 func create_player_list(players):

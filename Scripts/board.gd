@@ -216,3 +216,25 @@ func prompt_settlement(callback:Callable,starting:bool=false):
 	for i in avaliable:
 		i.prompt_select()
 		i.selected.connect(unprompt_corners.bind(callback))
+
+func unprompt_edges(edge:Edge,callback:Callable):
+	for i in get_children():
+		if i is Edge && i.button.visible:
+			i.unprompt()
+	callback.call(edge)
+
+func prompt_road(callback:Callable,starting:Corner=null):
+	var avaliable:Array[Edge] = []
+	if starting:
+		for e in starting.edges:
+			if e.owner_id==0:
+				avaliable.append(e)
+	else:
+		for i in get_children():
+			if i is Corner && i.avalilble_for_road(multiplayer.get_unique_id()):
+				for e in i.edges:
+					if e.owner_id==0 && not e in avaliable:
+						avaliable.append(e)
+	for i in avaliable:
+		i.prompt_select()
+		i.selected.connect(unprompt_edges.bind(callback))
