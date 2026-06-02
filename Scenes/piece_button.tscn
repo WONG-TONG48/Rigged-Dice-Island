@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bq4a5va01xwai"]
+
+[ext_resource type="Theme" uid="uid://cm48mil5la657" path="res://Themes/game_ui.theme" id="1_qe2v4"]
+[ext_resource type="Texture2D" uid="uid://823f1302y12o" path="res://Assets/house.svg" id="2_g7esh"]
+[ext_resource type="Script" uid="uid://v6ypkwvk13kf" path="res://Scripts/piece_button.gd" id="3_n6od7"]
+
+[node name="PieceButton" type="Button" unique_id=1093888706]
+offset_right = 95.0
+offset_bottom = 74.0
+theme = ExtResource("1_qe2v4")
+text = "Settlement"
+icon = ExtResource("2_g7esh")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("3_n6od7")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=750877401]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = -21.0
+offset_right = 42.0
+offset_bottom = 19.0
+grow_horizontal = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=2129338199]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

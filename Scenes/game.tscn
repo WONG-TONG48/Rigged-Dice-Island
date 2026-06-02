@@ -38,7 +38,7 @@ stretch = true
 
 [node name="Map" parent="HSplitContainer/VSplitContainer/SubViewportContainer" unique_id=469479429 instance=ExtResource("1_ebmjs")]
 handle_input_locally = false
-size = Vector2i(1898, 1068)
+size = Vector2i(1818, 1068)
 render_target_update_mode = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/VSplitContainer" unique_id=73096704]
