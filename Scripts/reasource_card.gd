@@ -26,6 +26,21 @@ static func get_color(type:Reasource) -> Color:
 		_:
 			return Color.BLACK
 
+static func get_string(type:Reasource) -> String:
+	match type:
+		Reasource.WHEAT:
+			return "Wheat"
+		Reasource.STONE:
+			return "Stone"
+		Reasource.SHEEP:
+			return "Sheep"
+		Reasource.WOOD:
+			return "Wood"
+		Reasource.BRICK:
+			return "Brick"
+		_:
+			return ""
+
 static func get_image(type:Reasource):
 	match type:
 		Reasource.WHEAT:

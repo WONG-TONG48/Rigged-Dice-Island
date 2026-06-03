@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://id4xo5ic0a65"]
 
 [ext_resource type="Theme" uid="uid://cm48mil5la657" path="res://Themes/game_ui.theme" id="1_e0il8"]
+[ext_resource type="Script" uid="uid://b07dbmjpolkc0" path="res://Scripts/hand_container.gd" id="2_wkocb"]
+[ext_resource type="PackedScene" uid="uid://bq4a5va01xwai" path="res://Scenes/piece_button.tscn" id="3_cpy5r"]
+[ext_resource type="Texture2D" uid="uid://cl54lf701n2hy" path="res://Assets/city.svg" id="4_wlc3w"]
 
 [node name="HandContainer" type="PanelContainer" unique_id=1192796358]
 offset_right = 1920.0
-offset_bottom = 173.0
+offset_bottom = 212.0
 theme = ExtResource("1_e0il8")
+script = ExtResource("2_wkocb")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1949613816]
 layout_mode = 2
@@ -20,3 +24,33 @@ size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer" unique_id=1443867469]
 layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="SettlementButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1093888706 instance=ExtResource("3_cpy5r")]
+layout_mode = 2
+cost = Dictionary[int, int]({
+0: 1,
+2: 1,
+3: 1,
+4: 1
+})
+
+[node name="RoadButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=709777250 instance=ExtResource("3_cpy5r")]
+layout_mode = 2
+text = "Road"
+icon = ExtResource("4_wlc3w")
+cost = Dictionary[int, int]({
+3: 1,
+4: 1
+})
+
+[node name="CityButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=266612253 instance=ExtResource("3_cpy5r")]
+layout_mode = 2
+text = "City"
+icon = ExtResource("4_wlc3w")
+cost = Dictionary[int, int]({
+0: 2,
+1: 3
+})
