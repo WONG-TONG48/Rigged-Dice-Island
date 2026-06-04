@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://otv5kuo1ekqp" path="res://Scenes/board.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://u8ydoml4q3kh" path="res://Scripts/game.gd" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://id4xo5ic0a65" path="res://Scenes/hand_container.tscn" id="3_3dryh"]
 [ext_resource type="PackedScene" uid="uid://djxtmwayaddpu" path="res://Scenes/game_menu.tscn" id="3_wrm1d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxrlw"]
@@ -38,10 +39,10 @@ stretch = true
 
 [node name="Map" parent="HSplitContainer/VSplitContainer/SubViewportContainer" unique_id=469479429 instance=ExtResource("1_ebmjs")]
 handle_input_locally = false
-size = Vector2i(1818, 1068)
+size = Vector2i(1818, 856)
 render_target_update_mode = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/VSplitContainer" unique_id=73096704]
+[node name="HandContainer" parent="HSplitContainer/VSplitContainer" unique_id=1192796358 instance=ExtResource("3_3dryh")]
 layout_mode = 2
 
 [node name="GameMenu" parent="HSplitContainer" unique_id=78630195 instance=ExtResource("3_wrm1d")]

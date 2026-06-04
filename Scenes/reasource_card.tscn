@@ -16,8 +16,10 @@ corner_radius_bottom_left = 5
 shadow_size = 5
 
 [node name="ReasourceCard" type="PanelContainer" unique_id=1055169009]
+custom_minimum_size = Vector2(100, 0)
 offset_right = 135.0
 offset_bottom = 193.0
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_nujd4")
 script = ExtResource("2_vdll1")
 

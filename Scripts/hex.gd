@@ -77,11 +77,13 @@ func create_corners(corner_scene:PackedScene,other_corners:Array[Corner]=[],othe
 			corner.name= name+" corner"+str(num)
 			corner.position=i+position
 			corners.append(corner)
+			corner.hexes.append(self)
 			num+=1
 		return
 	corners.resize(6)
 	
 	for i in other_corners:
+		i.hexes.append(self)
 		var hex:Hex = null
 		for j in other_hexes:
 			if i in j.corners:
@@ -107,6 +109,7 @@ func create_corners(corner_scene:PackedScene,other_corners:Array[Corner]=[],othe
 		corner.name= name+" corner"+str(i)
 		corner.position=verticies[i]+position
 		corners[i] = corner
+		corner.hexes.append(self)
 	return
 
 			

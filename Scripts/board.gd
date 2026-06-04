@@ -69,7 +69,7 @@ func export_board()->String:
 	return final_str.rstrip("|")
 
 func count_corner_item(type:Corner.Type,player_id):
-	var count := 0
+	var count = 0
 	for i in get_children():
 		if i is Corner && i.object==type && i.owner_id==player_id:
 			count+=1

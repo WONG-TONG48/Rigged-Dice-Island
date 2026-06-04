@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bgn7n7vjfmkjv" path="res://Scenes/user_plate.tscn" id="3_5a81j"]
 
 [node name="GameMenu" type="PanelContainer" unique_id=78630195]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
 anchors_preset = -1
 anchor_right = 0.14270833
 anchor_bottom = 1.0

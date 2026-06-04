@@ -7,6 +7,7 @@
 [node name="PieceButton" type="Button" unique_id=1093888706]
 offset_right = 95.0
 offset_bottom = 74.0
+size_flags_vertical = 3
 theme = ExtResource("1_qe2v4")
 theme_override_font_sizes/font_size = 29
 text = "Settlement"
@@ -18,6 +19,7 @@ script = ExtResource("3_n6od7")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=750877401]
 visible = false
+z_index = 10
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
