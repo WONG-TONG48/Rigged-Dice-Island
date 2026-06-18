@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bq4a5va01xwai" path="res://Scenes/piece_button.tscn" id="3_cpy5r"]
 [ext_resource type="PackedScene" uid="uid://5ky427c7061y" path="res://Scenes/reasource_card.tscn" id="3_hbcqt"]
 [ext_resource type="Texture2D" uid="uid://cl54lf701n2hy" path="res://Assets/city.svg" id="4_wlc3w"]
+[ext_resource type="Texture2D" uid="uid://cqyxkbihb7ce1" path="res://Assets/road.svg" id="5_ngiut"]
+[ext_resource type="Texture2D" uid="uid://c1o7a4hdlh76s" path="res://Assets/card.svg" id="7_qtvyh"]
 
 [node name="HandContainer" type="PanelContainer" unique_id=1192796358]
 offset_right = 1920.0
@@ -37,7 +39,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 2
+columns = 3
 
 [node name="SettlementButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1093888706 instance=ExtResource("3_cpy5r")]
 layout_mode = 2
@@ -51,11 +53,16 @@ cost = Dictionary[int, int]({
 [node name="RoadButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=709777250 instance=ExtResource("3_cpy5r")]
 layout_mode = 2
 text = "Road"
-icon = ExtResource("4_wlc3w")
+icon = ExtResource("5_ngiut")
 cost = Dictionary[int, int]({
 3: 1,
 4: 1
 })
+
+[node name="RollButton" type="Button" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1270380136]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "ROLL"
 
 [node name="CityButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=266612253 instance=ExtResource("3_cpy5r")]
 layout_mode = 2
@@ -65,3 +72,18 @@ cost = Dictionary[int, int]({
 0: 2,
 1: 3
 })
+
+[node name="CardButton" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1120440604 instance=ExtResource("3_cpy5r")]
+layout_mode = 2
+text = "Card"
+icon = ExtResource("7_qtvyh")
+cost = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1
+})
+
+[node name="EndButton" type="Button" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1166081173]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "END"

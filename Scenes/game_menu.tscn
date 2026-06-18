@@ -51,4 +51,7 @@ max_length = 20
 [node name="Players" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=284130706]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1492982755]
+layout_mode = 2
+
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

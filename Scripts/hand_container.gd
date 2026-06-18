@@ -2,11 +2,12 @@ extends PanelContainer
 class_name HandMenu
 
 @onready var card_container =$MarginContainer/HBoxContainer/MarginContainer/HBoxContainer
+@onready var button_grid = $MarginContainer/HBoxContainer/GridContainer
 @export var card_scene:PackedScene
 static var reasources:Dictionary[ReasourceCard.Reasource,int] = {ReasourceCard.Reasource.SHEEP:0,ReasourceCard.Reasource.BRICK:0,ReasourceCard.Reasource.STONE:0,ReasourceCard.Reasource.WHEAT:0,ReasourceCard.Reasource.WOOD:0,}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	end_turn()
 
 func draw_card_from_hex(tile:Hex.Tile):
 	if tile<5:
@@ -22,6 +23,10 @@ func add_card(type:ReasourceCard.Reasource):
 	card.reasource=type
 	card_container.add_child(card)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func start_turn():
+	button_grid.get_node("RollButton").disabled = false
+	
+
+func end_turn():
+	for i in button_grid.get_children():
+		i.disabled = true

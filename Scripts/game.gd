@@ -29,7 +29,7 @@ func setup_road(edge:Edge):
 	
 @rpc("any_peer")
 func start_turn():
-	pass
+	hand.set_turn(true)
 	
 @rpc("call_local")
 func create_player_list(players):
