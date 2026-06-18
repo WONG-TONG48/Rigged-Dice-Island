@@ -14,6 +14,7 @@ func _ready() -> void:
 			txr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			txr.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			txr.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			txr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			$Panel/GridContainer.add_child(txr)
 	$Panel/GridContainer.columns = min(cost.values().reduce(func(accum, number): return accum + number, 0),3)
 	

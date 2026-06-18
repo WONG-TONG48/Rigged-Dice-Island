@@ -4,6 +4,7 @@ class_name HandMenu
 @onready var card_container =$MarginContainer/HBoxContainer/MarginContainer/HBoxContainer
 @onready var button_grid = $MarginContainer/HBoxContainer/GridContainer
 @export var card_scene:PackedScene
+var callback:Callable
 static var reasources:Dictionary[ReasourceCard.Reasource,int] = {ReasourceCard.Reasource.SHEEP:0,ReasourceCard.Reasource.BRICK:0,ReasourceCard.Reasource.STONE:0,ReasourceCard.Reasource.WHEAT:0,ReasourceCard.Reasource.WOOD:0,}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,10 +24,16 @@ func add_card(type:ReasourceCard.Reasource):
 	card.reasource=type
 	card_container.add_child(card)
 
-func start_turn():
+func start_turn(roll_callback):
+	callback = roll_callback
 	button_grid.get_node("RollButton").disabled = false
 	
 
 func end_turn():
 	for i in button_grid.get_children():
 		i.disabled = true
+
+
+func _on_roll_button_pressed() -> void:
+	callback.call(randi()%6+randi()%6+2)
+	button_grid.get_node("RollButton").disabled = true

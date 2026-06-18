@@ -33,6 +33,7 @@ mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="Panel" unique_id=2129338199]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 3

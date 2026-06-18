@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://cm48mil5la657" path="res://Themes/game_ui.theme" id="1_r7qr8"]
 [ext_resource type="Script" uid="uid://bykpdd6ya8teu" path="res://Scripts/game_menu.gd" id="2_in7i6"]
 [ext_resource type="PackedScene" uid="uid://bgn7n7vjfmkjv" path="res://Scenes/user_plate.tscn" id="3_5a81j"]
+[ext_resource type="Texture2D" uid="uid://drdv5wo0npjch" path="res://Assets/Dice/1.png" id="4_ekb2d"]
 
 [node name="GameMenu" type="PanelContainer" unique_id=78630195]
 clip_contents = true
@@ -48,10 +49,32 @@ layout_mode = 2
 placeholder_text = "Send a message here..."
 max_length = 20
 
-[node name="Players" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=284130706]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=86441462]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1492982755]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=34188594]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_ekb2d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1857641571]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_ekb2d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=146982041]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+fit_content = true
+
+[node name="Players" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=284130706]
 layout_mode = 2
 
 [connection signal="text_submitted" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

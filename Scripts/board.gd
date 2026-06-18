@@ -191,7 +191,17 @@ func unprompt_corners(corner:Corner,callback:Callable):
 			i.unprompt()
 	callback.call(corner)
 
+func get_hexes_by_roll(roll:int) -> Array[Hex]:
+	var ans:Array[Hex] = []
+	for i in get_children():
+		if i is Corner && i.owner_id == multiplayer.get_unique_id():
+			for j in i.hexes:
+				if j.dice_val == roll:
+					ans.append(j)
+	return ans
+
 func prompt_settlement(callback:Callable,starting:bool=false):
+	
 	var avaliable:Array[Corner] = []
 	for i in get_children():
 		if i is Corner:

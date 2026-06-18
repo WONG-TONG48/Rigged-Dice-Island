@@ -2,7 +2,7 @@ extends Node
 
 @onready var board:Board = $HSplitContainer/VSplitContainer/SubViewportContainer/Map
 @onready var menu := $HSplitContainer/GameMenu
-@onready var hand := $HSplitContainer/VSplitContainer/HandContainer
+@onready var hand:HandMenu = $HSplitContainer/VSplitContainer/HandContainer
 var player:Main.Player
 signal setup_done
 
@@ -13,6 +13,7 @@ func start() -> void:
 @rpc("any_peer")
 func setup_turn():
 	board.prompt_settlement(setup_settlement,true)
+	menu.set_alert.rpc("place a settlement")
 
 func setup_settlement(corner:Corner):
 	if board.count_corner_item(Corner.Type.SETTLEMENT,multiplayer.get_unique_id()) ==1:
@@ -21,6 +22,7 @@ func setup_settlement(corner:Corner):
 	corner.set_type.rpc(Corner.Type.SETTLEMENT,multiplayer.get_unique_id())
 	menu.send_message.rpc(player.get_player_tag()+" placed a [color=black][u]settlement[/u][/color]!")
 	board.prompt_road(setup_road,corner)
+	menu.set_alert.rpc("place a road")
 
 func setup_road(edge:Edge):
 	edge.make_road.rpc(multiplayer.get_unique_id())
@@ -29,7 +31,8 @@ func setup_road(edge:Edge):
 	
 @rpc("any_peer")
 func start_turn():
-	hand.set_turn(true)
+	hand.start_turn(process_roll.rpc)
+	menu.set_alert.rpc("roll the dice")
 	
 @rpc("call_local")
 func create_player_list(players):
@@ -38,4 +41,11 @@ func create_player_list(players):
 	
 @rpc("call_local")
 func set_turn(id):
+	menu.set_rolling.rpc(true)
 	menu.set_turn(id)
+
+@rpc("call_local")
+func process_roll(roll:int):
+	menu.set_roll.rpc(roll)
+	for i in board.get_hexes_by_roll(roll):
+		hand.draw_card_from_hex(i.tile)
